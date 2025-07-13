@@ -1,0 +1,21 @@
+# netlify.toml
+
+# This section defines build settings.
+[build]
+  # Your site's static files (HTML, CSS, JS) are in the root directory.
+  publish = "."
+
+# This section tells Netlify where your serverless functions are.
+[functions]
+  # This is the crucial line: it points to your "api" folder.
+  directory = "api"
+
+# This section rewrites URL requests. It's essential for making
+# your functions work at the "/api/..." path.
+[[redirects]]
+  # Match any request that starts with /api/
+  from = "/api/*"
+  # And internally forward it to Netlify's function execution path.
+  to = "/.netlify/functions/:splat"
+  # Status 200 means this is a rewrite, not a browser redirect.
+  status = 200
